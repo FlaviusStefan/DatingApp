@@ -1,4 +1,6 @@
 using API.Data;
+using API.Interfaces;
+using API.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +13,12 @@ builder.Services.AddDbContext<DataContext>(opt =>
 });
 
 builder.Services.AddCors();
+// 1. builder.Services.AddTransient
+// 2. builder.Services.AddSingleton
+// 3. builder.Services.AddScoped
+// Out of all 3, Scoped = best use
+
+builder.Services.AddScoped<ITokenService, TokenService>();
 
 var app = builder.Build();
 

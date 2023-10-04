@@ -22,6 +22,7 @@ namespace API.Extensions
             // Out of all 3, Scoped = best use
 
             services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             return services;
         }

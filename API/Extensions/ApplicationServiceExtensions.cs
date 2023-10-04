@@ -16,13 +16,9 @@ namespace API.Extensions
             });
 
             services.AddCors();
-            // 1. builder.Services.AddTransient
-            // 2. builder.Services.AddSingleton
-            // 3. builder.Services.AddScoped
-            // Out of all 3, Scoped = best use
-
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             return services;
         }

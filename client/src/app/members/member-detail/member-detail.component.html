@@ -1,4 +1,6 @@
 <div class="row" *ngIf="member">
+
+    <!-- left-side -->
     <div class="col-4">
         <div class="card">
 
@@ -35,7 +37,35 @@
                     <button class="btn btn-success">Messages</button>
                 </div>
             </div>
-
         </div>   
     </div>
+
+    <!-- right-side -->
+
+    <div class="col-8">
+        <tabset class="member-tabs">
+
+            <tab heading="About {{member.knownAs}}">
+                <h4>Description</h4>
+                <p>{{member.introduction}}</p>
+                <h4>Looking for</h4>
+                <p>{{member.lookingFor}}</p>               
+            </tab>
+
+            <tab heading="Interests">
+                <h4>Interests</h4>
+                <p>{{member.interests}}</p>
+            </tab>
+
+            <tab heading="Photos">
+                <p>Photos will go here</p>
+            </tab>
+
+            <tab heading="Messages">
+                <p>Messages will go here</p>
+            </tab>
+
+        </tabset>
+    </div>
+
 </div>

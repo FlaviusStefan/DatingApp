@@ -33,7 +33,7 @@ namespace API.Data
                 .AsQueryable();
             
             query = query.Where( u => u.UserName != userParams.CurrentUsername);
-            query = query.Where( u => u.Gender != userParams.Gender);
+            query = query.Where( u => u.Gender == userParams.Gender);
 
                 return await PagedList<MemberDto>.CreateAsync(
                     query.AsNoTracking().ProjectTo<MemberDto>(_mapper.ConfigurationProvider),

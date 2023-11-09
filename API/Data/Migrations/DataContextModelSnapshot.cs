@@ -64,7 +64,7 @@ namespace API.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("API.Entities.Photo", b =>
@@ -79,7 +79,7 @@ namespace API.Data.Migrations
                     b.Property<bool>("IsMain")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("PublicId")
+                    b.Property<string>("Publicid")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Url")
@@ -89,22 +89,7 @@ namespace API.Data.Migrations
 
                     b.HasIndex("AppUserId");
 
-                    b.ToTable("Photos");
-                });
-
-            modelBuilder.Entity("AppUserAppUser", b =>
-                {
-                    b.Property<int>("LikedByUsersId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("LikedUsersId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("LikedByUsersId", "LikedUsersId");
-
-                    b.HasIndex("LikedUsersId");
-
-                    b.ToTable("AppUserAppUser");
+                    b.ToTable("Photos", (string)null);
                 });
 
             modelBuilder.Entity("API.Entities.Photo", b =>
@@ -116,21 +101,6 @@ namespace API.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("AppUser");
-                });
-
-            modelBuilder.Entity("AppUserAppUser", b =>
-                {
-                    b.HasOne("API.Entities.AppUser", null)
-                        .WithMany()
-                        .HasForeignKey("LikedByUsersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("API.Entities.AppUser", null)
-                        .WithMany()
-                        .HasForeignKey("LikedUsersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("API.Entities.AppUser", b =>

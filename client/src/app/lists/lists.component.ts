@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Member } from '../_models/member';
 import { MembersService } from '../_services/members.service';
 import { Pagination } from '../_models/pagination';
@@ -8,7 +8,7 @@ import { Pagination } from '../_models/pagination';
   templateUrl: './lists.component.html',
   styleUrls: ['./lists.component.css']
 })
-export class ListsComponent implements OnInit {
+export class ListsComponent {
   members: Member[] | undefined;
   predicate = 'liked';
   pageNumber = 1;

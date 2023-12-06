@@ -68,7 +68,7 @@ import { CustomRouteReuseStrategy } from './_services/customRouteReuseStrategy';
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
-    {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true},
     {provide: RouteReuseStrategy, useClass: CustomRouteReuseStrategy}
 
 

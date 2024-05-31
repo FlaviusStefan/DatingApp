@@ -14,9 +14,11 @@ import { preventUnsavedChangesGuard } from './_guards/prevent-unsaved-changes.gu
 import { memberDetailedResolver } from './_resolvers/member-detailed.resolver';
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { adminGuard } from './_guards/admin.guard';
+import { LearnmoreComponent } from './learnmore/learnmore/learnmore.component';
 
 const routes: Routes = [
-  {path: '', component: HomeComponent},
+  {path: 'home', component: HomeComponent},
+  {path: 'learnmore', component: LearnmoreComponent},
   {path: '',
     runGuardsAndResolvers: 'always',
     canActivate: [AuthGuard],

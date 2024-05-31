@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  constructor(private router: Router){}
+
+
   registerMode = false;
   users: any;
-  constructor() {}
+
  
   ngOnInit(): void {
   }
@@ -18,9 +22,11 @@ export class HomeComponent implements OnInit {
     this.registerMode = !this.registerMode;
   }
 
-  
-
   cancelRegisterMode(event: boolean){
     this.registerMode = event;
+  }
+
+  goToLearnmore(){
+    this.router.navigateByUrl('/learnmore');
   }
 }

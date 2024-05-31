@@ -17,7 +17,7 @@ import { adminGuard } from './_guards/admin.guard';
 import { LearnmoreComponent } from './learnmore/learnmore/learnmore.component';
 
 const routes: Routes = [
-  {path: 'home', component: HomeComponent},
+  {path: '', component: HomeComponent},
   {path: 'learnmore', component: LearnmoreComponent},
   {path: '',
     runGuardsAndResolvers: 'always',

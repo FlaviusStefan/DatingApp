@@ -14,7 +14,7 @@ export class UserManagementComponent implements OnInit {
   bsModalRef: BsModalRef<RolesModalComponent> = new BsModalRef<RolesModalComponent>();
   availableRoles = [
     'Admin',
-    'Moderator',
+    // 'Moderator',
     'Member'
   ]
 

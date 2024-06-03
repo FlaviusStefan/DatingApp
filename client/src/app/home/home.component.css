@@ -1,0 +1,32 @@
+.center-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 70vh;
+    text-align: center;
+    margin-top: 10vh;
+  }
+  
+  .center-content h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+  }
+  
+  .center-content .lead {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+  }
+  
+  .button-group {
+    display: flex;
+    gap: 30px; 
+    justify-content: center; 
+  }
+  
+  .btn-primary, .btn-info {
+    font-size: 1.25em; 
+    padding: 15px 30px; 
+    border-radius: 10px; 
+  }
+  

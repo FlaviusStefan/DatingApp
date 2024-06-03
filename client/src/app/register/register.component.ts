@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AccountService } from '../_services/account.service';
 import { ToastrService } from 'ngx-toastr';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -14,15 +14,17 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup = new FormGroup({});
   maxDate: Date = new Date();
   validationErrors: string[] | undefined;
+  showPassword = false;
+  showConfirmPassword = false;
 
-  constructor(private accountService: AccountService, private toastr: ToastrService, private fb: FormBuilder, private router: Router){}
+  constructor(private accountService: AccountService, private toastr: ToastrService, private fb: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
     this.initializeForm();
     this.maxDate.setFullYear(this.maxDate.getFullYear() - 18);
   }
 
-  initializeForm(){
+  initializeForm() {
     this.registerForm = this.fb.group({
       gender: ['male'],
       username: ['', Validators.required],
@@ -30,43 +32,48 @@ export class RegisterComponent implements OnInit {
       dateOfBirth: ['', Validators.required],
       city: ['', Validators.required],
       country: ['', Validators.required],
-      password: ['', [Validators.required, 
-                                     Validators.minLength(4), 
-                                     Validators.maxLength(8)]],
+      password: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(8), Validators.pattern(/^(?=.*[A-Z])/)]],
       confirmPassword: ['', [Validators.required, this.matchValues('password')]],
     });
     this.registerForm.controls['password'].valueChanges.subscribe({
       next: () => this.registerForm.controls['confirmPassword'].updateValueAndValidity()
-    })
+    });
   }
 
   matchValues(matchTo: string): ValidatorFn {
     return (control: AbstractControl) => {
-      return control.value === control.parent?.get(matchTo)?.value ? null : {notMatching: true}
-    }
+      return control.value === control.parent?.get(matchTo)?.value ? null : { notMatching: true };
+    };
   }
 
-  register(){
+  register() {
     const dob = this.GetDateOnly(this.registerForm.controls['dateOfBirth'].value);
-    const values  = {...this.registerForm.value, dateOfBirth: this.GetDateOnly(dob)};
+    const values = { ...this.registerForm.value, dateOfBirth: this.GetDateOnly(dob) };
     this.accountService.register(values).subscribe({
       next: response => {
-        this.router.navigateByUrl('/members')
+        this.router.navigateByUrl('/members');
       },
       error: error => {
         this.validationErrors = error;
       }
-    })
+    });
   }
 
-  cancel(){
+  cancel() {
     this.cancelRegister.emit(false);
   }
 
-  private GetDateOnly(dob: string | undefined){
-    if (!dob) 
-      return;
+  private GetDateOnly(dob: string | undefined) {
+    if (!dob) return;
     let theDob = new Date(dob);
-    return new Date(theDob.setMinutes(theDob.getMinutes()-theDob.getTimezoneOffset())).toISOString().slice(0,10);
+    return new Date(theDob.setMinutes(theDob.getMinutes() - theDob.getTimezoneOffset())).toISOString().slice(0, 10);
+  }
+
+  togglePasswordVisibility(field: string) {
+    if (field === 'password') {
+      this.showPassword = !this.showPassword;
+    } else if (field === 'confirmPassword') {
+      this.showConfirmPassword = !this.showConfirmPassword;
+    }
   }
 }
